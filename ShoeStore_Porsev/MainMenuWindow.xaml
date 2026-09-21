@@ -14,18 +14,36 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#7FFF00" CornerRadius="15" Margin="25,25,25,0" Padding="20" Height="100" VerticalAlignment="Top">
-            <Grid HorizontalAlignment="Center">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0"  Source="ботинки\Icon.png"
-            Margin="0,0,20,0"/>
-                <TextBlock Grid.Column="1" Text="Список товаров" FontSize="36" 
-               VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Times New Roman"/>
+                <Button Grid.Column="0" Name="BackBTN" Content="Выйти из системы" Height="30" Click="BackBTN_Click"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="ботинки\Icon.png" Width="100" Height="50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Список товаров" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Times New Roman"/>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Name="FIOTB" Text="ФИО" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Border>
-        <ListView Name="ListTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="1">
+        <Border Grid.Row="1" Background="#7FFF00" CornerRadius="15" Padding="20">
+            <StackPanel Orientation="Horizontal">
+                <Label Visibility="Hidden" Name="SearchLB" Content="Поиск: " Height="30"/>
+                <TextBox Visibility="Hidden"  Name="SearchTB" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" TextChanged="SearchTB_TextChanged"/>
+                <GroupBox Name="GrpBx" Visibility="Hidden" Header="Сортировка (по кол-ву на складе)" Width="250">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="OrderByBtn" Content="По возрастанию" Width="110" Height="20" Margin="5 0 5 0" Click="OrderByBtn_Click"/>
+                        <Button Name="OrderByDesBtn" Content="По убыванию" Width="110" Height="20" Margin="5 0 5 0" Click="OrderByDesBtn_Click"/>
+                    </StackPanel>
+                </GroupBox>
+                <Label Name="PrdLB" Visibility="Hidden" Content="Поставщик: " Height="30"/>
+                <ComboBox Name="PrdCB" Visibility="Hidden" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" DisplayMemberPath="ProviderName" SelectedValuePath="id_Provider" SelectionChanged="PrdCB_SelectionChanged" />
+                <Button Name="RstBt" Visibility="Hidden" Content="Сбросить фильтры" Width="110" Height="20" Margin="5 0 5 0" Click="RstBt_Click"/>
+            </StackPanel>
+        </Border>
+        <ListView Name="ListTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

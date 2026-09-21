@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShoeStore_Porsev"
         mc:Ignorable="d"
         Title="ООО Обувь - Авторизация" Height="450" Width="800"
-        Icon="ботинки\Icon.ico">
+        Icon="ботинки\Icon.ico" ResizeMode="NoResize">
     <Grid>
         <Border Background="#7FFF00" CornerRadius="15" Margin="25,25,25,0" Padding="20" Height="100" VerticalAlignment="Top">
             <Grid HorizontalAlignment="Center">
@@ -36,7 +36,7 @@
             <TextBlock Grid.Row="2" Text="Пароль" VerticalAlignment="Bottom" FontSize="16" FontFamily="Times New Roman"/>
             <PasswordBox Grid.Row="3" Name="PasswordTB"/>
             <Button Grid.Row="5" Content="Войти" FontSize="16" FontFamily="Times New Roman" Click="Button_Click"/>
-            <Button Grid.Row="7" Margin="70,0,70,0" Content="Войти как гость" FontSize="16" FontFamily="Times New Roman"/>
+            <Button Grid.Row="7" Margin="70,0,70,0" Content="Войти как гость" FontSize="16" FontFamily="Times New Roman" Click="Button_Click_1"/>
         </Grid>
     </Grid>
 </Window>

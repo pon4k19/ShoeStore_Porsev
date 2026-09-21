@@ -27,13 +27,41 @@ namespace ShoeStore_Porsev
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ShoeShopEntities.GetContext().User.Any(x => x.Login == LoginTB.Text && x.Password == PasswordTB.Password))
+            var authClient = ShoeShopEntities.GetContext().User.FirstOrDefault(x => x.Login == LoginTB.Text && x.Password == PasswordTB.Password);
+            string FIOAuthClient = authClient.FullName;
+            try
             {
-                MainMenuWindow mainMenu = new MainMenuWindow();
-                mainMenu.Show();
-                this.Close();
+                if (authClient.id_Role == 1)
+                {
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 1);
+                    mainMenu.Show();
+                    this.Close();
+                }
+                if (authClient.id_Role == 2)
+                {
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 2);
+                    mainMenu.Show();
+                    this.Close();
+                }
+                if (authClient.id_Role == 3)
+                {
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 3);
+                    mainMenu.Show();
+                    this.Close();
+                }                
             }
-            
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainMenuWindow mainMenu = new MainMenuWindow("Гость", 0);
+            mainMenu.Show();
+            this.Close();
         }
     }
 }
