@@ -41,7 +41,7 @@ namespace ShoeStore_Porsev
         public virtual Provider Provider { get; set; }
         public bool is_on_sale => Discount > 0;
         public bool is_discount => Discount > 15;
-        public decimal? price_decimal
+        public decimal? price_discount
         {
             get
             {
