@@ -24,7 +24,7 @@ namespace ShoeStore_Porsev
         public string Article { get; set; }
         public int id_ProductName { get; set; }
         public string Unit { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public int id_Provider { get; set; }
         public int id_Manufacturer { get; set; }
         public int id_Category { get; set; }

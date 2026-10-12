@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.Order" Width="1.5" PointX="8.125" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.OrderProduct" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.PickupPoint" Width="1.5" PointX="6.125" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoeShop_PorsevModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.ProductName" Width="1.5" PointX="0.625" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.Provider" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.Role" Width="1.5" PointX="10.375" PointY="8.5" IsExpanded="true" />
@@ -19,18 +18,19 @@
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.Street" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.sysdiagrams" Width="1.5" PointX="24.5" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoeShop_PorsevModel.User" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_PickupPoint_City" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Manufacturer" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_Order_PickupPoint" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_Order_Status" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_OrderProduct_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoeShop_PorsevModel.FK_OrderProduct_Product" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_PickupPoint_Street" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_ProductName" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="ShoeShop_PorsevModel.FK_User_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShoeShop_PorsevModel.Product" Width="1.5" PointX="3" PointY="3.125" />
+        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Category" />
+        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Manufacturer" />
+        <AssociationConnector Association="ShoeShop_PorsevModel.FK_OrderProduct_Product" />
+        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_ProductName" />
+        <AssociationConnector Association="ShoeShop_PorsevModel.FK_Product_Provider" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

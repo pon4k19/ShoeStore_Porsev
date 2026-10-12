@@ -40,7 +40,6 @@ namespace ShoeStore_Porsev
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderProduct> OrderProduct { get; set; }
         public virtual DbSet<PickupPoint> PickupPoint { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductName> ProductName { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -48,5 +47,6 @@ namespace ShoeStore_Porsev
         public virtual DbSet<Street> Street { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }

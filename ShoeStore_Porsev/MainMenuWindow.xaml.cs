@@ -35,8 +35,10 @@ namespace ShoeStore_Porsev
                 PrdCB.Visibility = Visibility.Visible;
                 PrdLB.Visibility = Visibility.Visible;
                 RstBt.Visibility = Visibility.Visible;
+                AddBt.Visibility = Visibility.Visible;
+                DeleteBt.Visibility = Visibility.Visible;
             }
-            if (roleClient == 2)
+            else if (roleClient == 2)
             {
                 SearchLB.Visibility = Visibility.Visible;
                 SearchTB.Visibility = Visibility.Visible;
@@ -44,11 +46,19 @@ namespace ShoeStore_Porsev
                 PrdCB.Visibility = Visibility.Visible;
                 PrdLB.Visibility = Visibility.Visible;
                 RstBt.Visibility = Visibility.Visible;
+                AddBt.Visibility = Visibility.Collapsed;
+                DeleteBt.Visibility = Visibility.Collapsed;
             }
-            if (roleClient == 3)
+            else
             {
-                SearchLB.Visibility = Visibility.Visible;
-                SearchTB.Visibility = Visibility.Visible;
+                SearchLB.Visibility = Visibility.Collapsed;
+                SearchTB.Visibility = Visibility.Collapsed;
+                GrpBx.Visibility = Visibility.Collapsed;
+                PrdCB.Visibility = Visibility.Collapsed;
+                PrdLB.Visibility = Visibility.Collapsed;
+                RstBt.Visibility = Visibility.Collapsed;
+                AddBt.Visibility = Visibility.Collapsed;
+                DeleteBt.Visibility = Visibility.Collapsed;
             }
 
             ListTovar.ItemsSource = ShoeShopEntities.GetContext().Product.ToList();
@@ -122,6 +132,72 @@ namespace ShoeStore_Porsev
             AuthorizationWindow authWindow = new AuthorizationWindow();
             authWindow.Show();
             this.Close();
+        }
+
+        private void ListTovar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (Application.Current.Windows.OfType<AddEditProductWindow>().Any()) return;
+            var selectedProduct = ListTovar.SelectedItem as Product;
+            AddEditProductWindow addEditProductWindow = new AddEditProductWindow(selectedProduct);
+            addEditProductWindow.ShowDialog();
+            Filter();
+        }
+
+        private void AddBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.Windows.OfType<AddEditProductWindow>().Any()) return;
+            AddEditProductWindow addEditProductWindow = new AddEditProductWindow(null);
+            addEditProductWindow.ShowDialog();
+            ListTovar.ItemsSource = ShoeShopEntities.GetContext().Product.ToList();
+        }
+        private void DeleteBt_Click(object sender, RoutedEventArgs e)
+        {
+            var tovar = ListTovar.SelectedItem as Product;
+            if (tovar == null)
+            {
+                MessageBox.Show("Выберите товар для удаления.");
+                return;
+            }
+
+            bool inOrder = ShoeShopEntities.GetContext().OrderProduct
+                .Any(op => op.id_Product == tovar.id_Product);
+
+            if (inOrder)
+            {
+                MessageBox.Show($"Товар «{tovar.ProductName?.ProductName1}» присутствует в заказе и не может быть удалён.",
+                                "Удаление запрещено",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var result = MessageBox.Show(
+                $"Удалить товар «{tovar.ProductName.ProductName1}»?",
+                "Подтверждение удаления",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes) return;
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(tovar.Photo)
+                    && !tovar.Photo.EndsWith("picture.png", StringComparison.OrdinalIgnoreCase)
+                    && System.IO.File.Exists(tovar.Photo))
+                {
+                    try { System.IO.File.Delete(tovar.Photo); } catch { }
+                }
+
+                ShoeShopEntities.GetContext().Product.Remove(tovar);
+                ShoeShopEntities.GetContext().SaveChanges();
+                MessageBox.Show("Товар удалён.");
+
+                Filter();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка удаления",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
     

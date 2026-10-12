@@ -50,7 +50,7 @@ namespace ShoeStore_Porsev
                     this.Close();
                 }                
             }
-            catch (Exception ex)
+            catch
             {
 
             }

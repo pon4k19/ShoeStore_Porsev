@@ -30,20 +30,22 @@
         </Border>
         <Border Grid.Row="1" Background="#7FFF00" CornerRadius="15" Padding="20">
             <StackPanel Orientation="Horizontal">
-                <Label Visibility="Hidden" Name="SearchLB" Content="Поиск: " Height="30"/>
-                <TextBox Visibility="Hidden"  Name="SearchTB" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" TextChanged="SearchTB_TextChanged"/>
-                <GroupBox Name="GrpBx" Visibility="Hidden" Header="Сортировка (по кол-ву на складе)" Width="250">
+                <Label Name="SearchLB" Content="Поиск: " Height="30"/>
+                <TextBox Name="SearchTB" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" TextChanged="SearchTB_TextChanged"/>
+                <GroupBox Name="GrpBx" Header="Сортировка (по кол-ву на складе)" Width="250">
                     <StackPanel Orientation="Horizontal">
                         <Button Name="OrderByBtn" Content="По возрастанию" Width="110" Height="20" Margin="5 0 5 0" Click="OrderByBtn_Click"/>
                         <Button Name="OrderByDesBtn" Content="По убыванию" Width="110" Height="20" Margin="5 0 5 0" Click="OrderByDesBtn_Click"/>
                     </StackPanel>
                 </GroupBox>
-                <Label Name="PrdLB" Visibility="Hidden" Content="Поставщик: " Height="30"/>
-                <ComboBox Name="PrdCB" Visibility="Hidden" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" DisplayMemberPath="ProviderName" SelectedValuePath="id_Provider" SelectionChanged="PrdCB_SelectionChanged" />
-                <Button Name="RstBt" Visibility="Hidden" Content="Сбросить фильтры" Width="110" Height="20" Margin="5 0 5 0" Click="RstBt_Click"/>
+                <Label Name="PrdLB" Content="Поставщик: " Height="30"/>
+                <ComboBox Name="PrdCB" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" DisplayMemberPath="ProviderName" SelectedValuePath="id_Provider" SelectionChanged="PrdCB_SelectionChanged" />
+                <Button Name="RstBt" Content="Сбросить фильтры" Width="110" Height="20" Margin="5 0 5 0" Click="RstBt_Click"/>
+                <Button Name="AddBt" Content="Добавить товар" Width="110" Height="20" Margin="5 0 5 0" Click="AddBt_Click"/>
+                <Button Name="DeleteBt" Content="Удалить товар" Width="110" Height="20" Margin="5 0 5 0" Click="DeleteBt_Click" Visibility="Collapsed"/>
             </StackPanel>
         </Border>
-        <ListView Name="ListTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="2">
+        <ListView Name="ListTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="2" MouseDoubleClick="ListTovar_MouseDoubleClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

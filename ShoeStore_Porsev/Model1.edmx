@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ShoeShop_PorsevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ShoeShop_PorsevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_Category" />
@@ -66,7 +66,7 @@
           <Property Name="Article" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="id_ProductName" Type="int" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="10" />
-          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="id_Provider" Type="int" Nullable="false" />
           <Property Name="id_Manufacturer" Type="int" Nullable="false" />
           <Property Name="id_Category" Type="int" Nullable="false" />
@@ -338,8 +338,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShoeShop_PorsevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -349,7 +348,7 @@
           </Key>
           <Property Name="id_Category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ShoeShop_PorsevModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -365,7 +364,7 @@
           </Key>
           <Property Name="id_Manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManufacturerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ShoeShop_PorsevModel.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -393,7 +392,7 @@
           <Property Name="id_Product" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ShoeShop_PorsevModel.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="PickupPoint">
           <Key>
@@ -408,35 +407,13 @@
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_PickupPoint" FromRole="PickupPoint" ToRole="Order" />
           <NavigationProperty Name="Street" Relationship="Self.FK_PickupPoint_Street" FromRole="PickupPoint" ToRole="Street" />
         </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="id_Product" />
-          </Key>
-          <Property Name="id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Article" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_ProductName" Type="Int32" Nullable="false" />
-          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="id_Provider" Type="Int32" Nullable="false" />
-          <Property Name="id_Manufacturer" Type="Int32" Nullable="false" />
-          <Property Name="id_Category" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Int32" />
-          <Property Name="Stock" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="OrderProduct" Relationship="Self.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
-          <NavigationProperty Name="ProductName" Relationship="Self.FK_Product_ProductName" FromRole="Product" ToRole="ProductName" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Product_Provider" FromRole="Product" ToRole="Provider" />
-        </EntityType>
         <EntityType Name="ProductName">
           <Key>
             <PropertyRef Name="id_ProductName" />
           </Key>
           <Property Name="id_ProductName" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductName1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductName" FromRole="ProductName" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ShoeShop_PorsevModel.FK_Product_ProductName" FromRole="ProductName" ToRole="Product" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -444,7 +421,7 @@
           </Key>
           <Property Name="id_Provider" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Provider" FromRole="Provider" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="ShoeShop_PorsevModel.FK_Product_Provider" FromRole="Provider" ToRole="Product" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -492,18 +469,6 @@
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
-        <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="id_Category" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PickupPoint_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="PickupPoint" Type="Self.PickupPoint" Multiplicity="*" />
@@ -513,18 +478,6 @@
             </Principal>
             <Dependent Role="PickupPoint">
               <PropertyRef Name="id_City" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Manufacturer">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manufacturer">
-              <PropertyRef Name="id_Manufacturer" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Manufacturer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -576,18 +529,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderProduct_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id_Product" />
-            </Principal>
-            <Dependent Role="OrderProduct">
-              <PropertyRef Name="id_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PickupPoint_Street">
           <End Role="Street" Type="Self.Street" Multiplicity="1" />
           <End Role="PickupPoint" Type="Self.PickupPoint" Multiplicity="*" />
@@ -597,30 +538,6 @@
             </Principal>
             <Dependent Role="PickupPoint">
               <PropertyRef Name="id_Street" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ProductName">
-          <End Role="ProductName" Type="Self.ProductName" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductName">
-              <PropertyRef Name="id_ProductName" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_ProductName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Provider">
-          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="id_Provider" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Provider" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,7 +560,6 @@
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" />
           <EntitySet Name="PickupPoint" EntityType="Self.PickupPoint" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductName" EntityType="Self.ProductName" />
           <EntitySet Name="Provider" EntityType="Self.Provider" />
           <EntitySet Name="Role" EntityType="Self.Role" />
@@ -651,17 +567,9 @@
           <EntitySet Name="Street" EntityType="Self.Street" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
           <AssociationSet Name="FK_PickupPoint_City" Association="Self.FK_PickupPoint_City">
             <End Role="City" EntitySet="City" />
             <End Role="PickupPoint" EntitySet="PickupPoint" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_PickupPoint" Association="Self.FK_Order_PickupPoint">
             <End Role="PickupPoint" EntitySet="PickupPoint" />
@@ -679,27 +587,118 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderProduct_Product" Association="Self.FK_OrderProduct_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="OrderProduct" EntitySet="OrderProduct" />
-          </AssociationSet>
           <AssociationSet Name="FK_PickupPoint_Street" Association="Self.FK_PickupPoint_Street">
             <End Role="Street" EntitySet="Street" />
             <End Role="PickupPoint" EntitySet="PickupPoint" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductName" Association="Self.FK_Product_ProductName">
-            <End Role="ProductName" EntitySet="ProductName" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Provider" Association="Self.FK_Product_Provider">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <EntitySet Name="Product" EntityType="ShoeShop_PorsevModel.Product" />
+          <AssociationSet Name="FK_Product_Category" Association="ShoeShop_PorsevModel.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Manufacturer" Association="ShoeShop_PorsevModel.FK_Product_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Product" Association="ShoeShop_PorsevModel.FK_OrderProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductName" Association="ShoeShop_PorsevModel.FK_Product_ProductName">
+            <End Role="ProductName" EntitySet="ProductName" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Provider" Association="ShoeShop_PorsevModel.FK_Product_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id_Product" />
+          </Key>
+          <Property Name="id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Article" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="id_ProductName" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="id_Provider" Type="Int32" Nullable="false" />
+          <Property Name="id_Manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="id_Category" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="ShoeShop_PorsevModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Manufacturer" Relationship="ShoeShop_PorsevModel.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="OrderProduct" Relationship="ShoeShop_PorsevModel.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
+          <NavigationProperty Name="ProductName" Relationship="ShoeShop_PorsevModel.FK_Product_ProductName" FromRole="Product" ToRole="ProductName" />
+          <NavigationProperty Name="Provider" Relationship="ShoeShop_PorsevModel.FK_Product_Provider" FromRole="Product" ToRole="Provider" />
+        </EntityType>
+        <Association Name="FK_Product_Category">
+          <End Type="ShoeShop_PorsevModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="ShoeShop_PorsevModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id_Category" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Manufacturer">
+          <End Type="ShoeShop_PorsevModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+          <End Type="ShoeShop_PorsevModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="id_Manufacturer" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Product">
+          <End Type="ShoeShop_PorsevModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ShoeShop_PorsevModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id_Product" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="id_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductName">
+          <End Type="ShoeShop_PorsevModel.ProductName" Role="ProductName" Multiplicity="1" />
+          <End Type="ShoeShop_PorsevModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductName">
+              <PropertyRef Name="id_ProductName" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_ProductName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Provider">
+          <End Type="ShoeShop_PorsevModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="ShoeShop_PorsevModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="id_Provider" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -765,24 +764,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="ShoeShop_PorsevModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
-                <ScalarProperty Name="Article" ColumnName="Article" />
-                <ScalarProperty Name="id_ProductName" ColumnName="id_ProductName" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="id_Provider" ColumnName="id_Provider" />
-                <ScalarProperty Name="id_Manufacturer" ColumnName="id_Manufacturer" />
-                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProductName">
             <EntityTypeMapping TypeName="ShoeShop_PorsevModel.ProductName">
               <MappingFragment StoreEntitySet="ProductName">
@@ -842,6 +823,24 @@
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="ShoeShop_PorsevModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
+                <ScalarProperty Name="id_Manufacturer" ColumnName="id_Manufacturer" />
+                <ScalarProperty Name="id_Provider" ColumnName="id_Provider" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="id_ProductName" ColumnName="id_ProductName" />
+                <ScalarProperty Name="Article" ColumnName="Article" />
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
