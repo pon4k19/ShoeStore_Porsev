@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoeStore_Porsev"
         mc:Ignorable="d"
-        Title="ООО Обувь - Список товаров" Height="600" Width="1000"
+        Title="ООО Обувь - Список товаров" Height="600" Width="1150"
         Icon="/ботинки/Icon.ico">
     <Grid>
         <Grid.RowDefinitions>
@@ -42,7 +42,8 @@
                 <ComboBox Name="PrdCB" Width="120" Height="20" HorizontalAlignment="Center" Margin="0 0 5 0" DisplayMemberPath="ProviderName" SelectedValuePath="id_Provider" SelectionChanged="PrdCB_SelectionChanged" />
                 <Button Name="RstBt" Content="Сбросить фильтры" Width="110" Height="20" Margin="5 0 5 0" Click="RstBt_Click"/>
                 <Button Name="AddBt" Content="Добавить товар" Width="110" Height="20" Margin="5 0 5 0" Click="AddBt_Click"/>
-                <Button Name="DeleteBt" Content="Удалить товар" Width="110" Height="20" Margin="5 0 5 0" Click="DeleteBt_Click" Visibility="Collapsed"/>
+                <Button Name="DeleteBt" Content="Удалить товар" Width="110" Height="20" Margin="5 0 5 0" Click="DeleteBt_Click"/>
+                <Button Name="AddOrder" Content="Добавить заказ" Width="110" Height="20" Margin="5 0 5 0" Click="AddOrder_Click"/>
             </StackPanel>
         </Border>
         <ListView Name="ListTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="2" MouseDoubleClick="ListTovar_MouseDoubleClick">

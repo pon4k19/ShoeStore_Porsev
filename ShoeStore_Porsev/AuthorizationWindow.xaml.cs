@@ -33,19 +33,19 @@ namespace ShoeStore_Porsev
             {
                 if (authClient.id_Role == 1)
                 {
-                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 1);
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 1, authClient.id_User);
                     mainMenu.Show();
                     this.Close();
                 }
                 if (authClient.id_Role == 2)
                 {
-                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 2);
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 2, authClient.id_User);
                     mainMenu.Show();
                     this.Close();
                 }
                 if (authClient.id_Role == 3)
                 {
-                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 3);
+                    MainMenuWindow mainMenu = new MainMenuWindow(FIOAuthClient, 3, authClient.id_User);
                     mainMenu.Show();
                     this.Close();
                 }                
@@ -59,7 +59,7 @@ namespace ShoeStore_Porsev
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MainMenuWindow mainMenu = new MainMenuWindow("Гость", 0);
+            MainMenuWindow mainMenu = new MainMenuWindow("Гость", 0, 0);
             mainMenu.Show();
             this.Close();
         }

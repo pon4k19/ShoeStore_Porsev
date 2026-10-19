@@ -22,12 +22,16 @@ namespace ShoeStore_Porsev
     {
         private int PRDID = 0;
         int sortMode = -1;
+        private int _roleClient;
+        private int _idUser;
 
-        public MainMenuWindow(string FIOAuthClient, int roleClient)
+        public MainMenuWindow(string FIOAuthClient, int roleClient, int idUser)
         {
             InitializeComponent();
+            _roleClient = roleClient;
             FIOTB.Text = FIOAuthClient;
-            if (roleClient == 1)
+            _idUser = idUser;
+            if (_roleClient == 1)
             {
                 SearchLB.Visibility = Visibility.Visible;
                 SearchTB.Visibility = Visibility.Visible;
@@ -37,8 +41,9 @@ namespace ShoeStore_Porsev
                 RstBt.Visibility = Visibility.Visible;
                 AddBt.Visibility = Visibility.Visible;
                 DeleteBt.Visibility = Visibility.Visible;
+                AddOrder.Visibility = Visibility.Visible;
             }
-            else if (roleClient == 2)
+            else if (_roleClient == 2)
             {
                 SearchLB.Visibility = Visibility.Visible;
                 SearchTB.Visibility = Visibility.Visible;
@@ -48,6 +53,7 @@ namespace ShoeStore_Porsev
                 RstBt.Visibility = Visibility.Visible;
                 AddBt.Visibility = Visibility.Collapsed;
                 DeleteBt.Visibility = Visibility.Collapsed;
+                AddOrder.Visibility = Visibility.Visible;
             }
             else
             {
@@ -59,6 +65,7 @@ namespace ShoeStore_Porsev
                 RstBt.Visibility = Visibility.Collapsed;
                 AddBt.Visibility = Visibility.Collapsed;
                 DeleteBt.Visibility = Visibility.Collapsed;
+                AddOrder.Visibility = Visibility.Visible;
             }
 
             ListTovar.ItemsSource = ShoeShopEntities.GetContext().Product.ToList();
@@ -198,6 +205,12 @@ namespace ShoeStore_Porsev
                 MessageBox.Show(ex.Message, "Ошибка удаления",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            OrdersWindow ordersWindow = new OrdersWindow(_roleClient, _idUser);
+            ordersWindow.Show();
+            this.Close();
         }
     }
     

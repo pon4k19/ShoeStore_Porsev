@@ -1,0 +1,77 @@
+﻿<Window x:Class="ShoeStore_Porsev.OrdersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShoeStore_Porsev"
+        mc:Ignorable="d"
+        Title="OrdersWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#7FFF00" CornerRadius="15" Margin="25,25,25,0" Padding="20" Height="100" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Name="BackBTN" Content="Вернуться к товарам" Height="30" Click="BackBTN_Click"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="ботинки\Icon.png" Width="100" Height="50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Список заказов" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Times New Roman"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Background="#7FFF00" CornerRadius="15" Padding="20">
+            <StackPanel Orientation="Horizontal">
+                <Button Name="AddBt" Content="Добавить товар" Width="110" Height="20" Margin="5 0 5 0" Click="AddBt_Click"/>
+                <Button Name="DeleteBt" Content="Удалить товар" Width="110" Height="20" Margin="5 0 5 0" Click="DeleteBt_Click"/>
+            </StackPanel>
+        </Border>
+        <ListView Name="OrderTovar" VirtualizingPanel.ScrollUnit="Pixel" Grid.Row="2" MouseDoubleClick="OrderTovar_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="2" Margin="5" BorderBrush="Black">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="550"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderThickness="1" Margin="5" BorderBrush="Black">
+                                <StackPanel Margin="5" Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Артикул заказа: "/>
+                                        <TextBlock Text="{Binding OrderNumber}" FontWeight="Bold"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Статус заказа: "/>
+                                        <TextBlock Text="{Binding Status.StatusName}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Адрес пункта выдачи: "/>
+                                        <TextBlock Text="{Binding PickupPoint.Street.StreetName}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дата заказа: "/>
+                                        <TextBlock Text="{Binding OrderDate}" TextWrapping="Wrap"/>
+                                    </StackPanel>                                    
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="1" BorderThickness="2" Margin="5"
+                                BorderBrush="Black">
+                                <StackPanel>
+                                    <TextBlock Text="Дата доставки: " VerticalAlignment="Top" TextWrapping="Wrap" Margin="5" TextAlignment="Center"/>
+                                    <TextBlock Text="{Binding DeliveryDate}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
